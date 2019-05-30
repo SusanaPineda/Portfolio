@@ -5106,7 +5106,13 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 .navbar-brand>img {
     display: block;
-    max-height: 60px
+}
+
+@media (max-width:768px) {
+    .navbar-brand>img {
+        display: block;
+        max-height: 60px;
+    }
 }
 
 @media (min-width:768px) {
