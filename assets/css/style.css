@@ -157,7 +157,7 @@ nav.navbar.bootsnav ul.nav>li>a {
 }
 
 nav.navbar.bootsnav ul.nav>li>a {
-    padding: 35px 20px;
+    padding: 25px 20px;
 }
 
 nav.navbar.bootsnav ul.nav>li>a:hover,
@@ -439,6 +439,9 @@ nav.navbar.bootsnav .navbar-toggle i {
 .education-horizontal-timeline {
     padding: 80px 0;
 }
+.education-horizontal-timeline .row .col-sm-3 {
+    padding-right: 0;
+}
 
 
 /*.education-horizontal-timeline*/
@@ -449,6 +452,7 @@ nav.navbar.bootsnav .navbar-toggle i {
 
 .single-horizontal-timeline .experience-time h3 {
     text-transform: capitalize;
+    height: 20px;
 }
 
 .single-horizontal-timeline .experience-time h3 span {
