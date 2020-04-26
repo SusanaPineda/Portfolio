@@ -75,11 +75,11 @@
                         <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                                 <li class=" smooth-menu active"></li>
-                                <li class=" smooth-menu"><a href="#education">Formación</a></li>
-                                <li class="smooth-menu"><a href="#skills">Skills</a></li>
-                                <li class="smooth-menu"><a href="#portfolio">Portfolio</a></li>
-                                <li class="smooth-menu"><a href="#experience">Experiencia</a></li>
-                                <li class="smooth-menu"><a href="#contact">Contacto</a></li>
+                                <li class=" smooth-menu"><a href="index.html#education">Formación</a></li>
+                                <li class="smooth-menu"><a href="index.html#skills">Skills</a></li>
+                                <li class="smooth-menu"><a href="index.html#portfolio">Portfolio</a></li>
+                                <li class="smooth-menu"><a href="index.html#experience">Experiencia</a></li>
+                                <li class="smooth-menu"><a href="index.html#contact">Contacto</a></li>
                             </ul>
                             <!--/.nav -->
                         </div>
@@ -105,20 +105,45 @@
                         <main class="col-md-8 col-md-offset-2" style="display: block;">
                             <article class="blog-item">
                                 <img class="img-responsive center-block" src="assets/images/SigueLineas/sigueLineas 1.png" alt="blog-featured-image">
+                                
+                                <!--Entrada blog-->
                                 <div class="blog-heading">
-                                    <h2 class="section-heading text-center">Sigue Lineas</h2>
-                                    <span class="date">may 24,2015</span>
+                                    <h2 class="section-heading text-center">Sigue Lineas - Primera Aproximación</h2>
+                                    <span class="date">8 de Marzo de 2020</span>
                                 </div>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the rinting and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever sincer they 1500s. Nullam id condimentum purus. In non ex at ligula fringilla lobortis. Ut et mauris auctor, aliquet nulla sed, aliquam mauris. Vestibulum sed malesuada dolor. Integer fringilla odio a dolor aliquet, eu euismod lectus porttitor. Proin et libero nec eros eleifend commodo Phasellus sodales volutpat diam, id sagittis purus egestas dapibus. Donec bibendum est quis mi commodo blandit. Maecenas pellentesque, massa vitae faucibus consectetur, ante magna gravida magna, ut venenatis massa augue et odio. Aliquam luctus viverra velit, non euismod ligula congue sed.
-
+                                    El primer problema al que debemos enfrentarnos es decidir si la dirección que lleva nuestro F1 es la correcta. 
+                                    Para ello utilizaremos la línea roja que aparece en el centro del carril.
                                 </p>
 
                                 <p>
-                                    Mauris nunc leo, sollicitudin a ligula ut, iaculis bibendum lorem. Duis gravida suscipit purus, at consequat diam sagittis sit amet. Mauris sed nisl vel urna egestas elementum eget quis ipsum. Nulla a enim et justo facilisis ornare. Sed ante sem, dignissim a vehicula et, rutrum volutpat turpis. 
+                                    Lo primero que se ha hecho para afrontar este problema ha sido aplicar una máscara de color de forma que la imágen
+                                    tenga unicamente valores 0 y 255. Una vez aplicada la máscara, se ha seleccionado una fila de la imagen y se han obtenido 
+                                    las posiciones en las cuales tiene un valor mayor que 0, es decir, existe línea. 
                                 </p>
 
-                                <div class="row">
+                                <p>
+                                    Una vez que tenemos la posición en la que se encuentra la linea, calculamos el error que hay hasta la posición central de la imagen.
+                                    De esta forma sabremos si el coche está en la dirección correcta o debemos corregir la rotación. Para ello, calculamos la posición del punto 
+                                    medio de la linea mediante la máscara anterior y restamos con la posición central de la imagen. Este error será el utilizado para el controlador.
+                                </p>
+
+                                <p>
+                                    Para controlar el giro y la velocidad de nuestro coche, vamos a utilizar un controlador PD. En esta primera aproximación unicamente vamos a tener en 
+                                    cuenta la P, es decir, solo vamos a tener en cuenta el error en el frame actual. Con este error indicaremos al F1 cuanto debe rotar para estar bien posicionado 
+                                    sobre la línea.
+                                </p>
+
+                                <p>
+                                    El problema principal de esta implementación son las fuertes oscilaciones entre una posición y la siguiente cuando el coche trata de corregir su dirección. Esta implementación
+                                    no nos permite tener velocidades muy altas ya que pierde facilmente la línea a seguir.
+                                </p>
+
+                                <p>
+                                    En <a href="https://www.youtube.com/watch?v=EPQRAjrvLv0"><u>este enlace</u></a>  se puede ver una ejecución utilizando esta implementación inicial.
+                                </p>
+
+                                <!---<div class="row">
                                     <div class="col-md-6">
                                         <blockquote>
                                             <p>Duis eget ultricies lorem, et rhoncus augue. Aliquam id est sem tincidunt nisi ac, tristique enim. enim eget facilisis orcidearn malesuada.</p>
@@ -148,6 +173,93 @@
                                             <strong><em>This is Bold italic Text</em></strong> sed malesuada dolor. Integer fringilla odio a dolor aliquet, eu euismod lectus porttitor. Proin et libero nec eros eleifend commodo Phasellus sodales volutpat diam, id sagittis purus egestas dapibus. 
                                             <a href="#"><u>This is Link Text</u></a> 
                                             quis mi commodo blandit. Maecenas pellentesque, massa vitae faucibus consectetur, ante magna gravida magna, ut venenatis massa augue et odio.
+                                        </p>
+                                    </div>
+                                </div>-->
+
+                                <hr>
+
+                                <!--Entrada blog-->
+                                <div class="blog-heading">
+                                    <h2 class="section-heading text-center">Sigue Lineas - Controlador PD</h2>
+                                    <span class="date">10 de Marzo de 2020</span>
+                                </div>
+                                <p>
+                                    Una vez que tenemos el controlador P implementado, podemos tratar de resolver los problemas que presenta (fuertes oscilaciones) añadiendo
+                                    una nueva "variable".
+                                </p>
+
+                                <p>
+                                    Para solucionar las fuertes oscilaciones que sufre el controlador P, vamos a añadir un nuevo término que tenga en cuenta la corrección y el error 
+                                    que había en interaciones anteriores. Para ello, unicamente añadiremos una nueva variable global en la que almacenar el error en la iteración anterior
+                                    y calcularemos la diferencia entre el error actual y el anterior. Este nuevo valor afectará en un tanto porciento a la corrección que se va a aplicar a la 
+                                    rotación del frame actual. De esta forma el controlador actuará diferente si el error está creciendo o decreciendo y suavizará las oscilaciones.
+                                </p>
+
+                                <p>
+                                   IMPORTANTE: ¡Recuerda actualizar el error anterior en cada iteración!.
+                                </p>
+
+                                <p>
+                                    En esta nueva versión se ha añadido una nueva funcionalidad para reencontrar la linea que se debe seguir en caso de perderla.
+                                </p>
+
+                                <p>
+                                    Puesto que en esta nueva implementación tenemos el error de la iteración anterior, vamos a utilizarla para recolocarnos. Si perdemos la
+                                    línea y en la iteración anterior el error indicaba que debíamos girar a la derecha, giraremos en esa dirección hasta encontrar la linea.
+                                </p>
+
+                                <p>
+                                    Debemos tener cuidado con esta solución, ya que es posible que el F1 detecte la línea en la dirección opuesta y no complete la vuelta.
+                                </p>
+
+                                <p>
+                                    A pesar de que esta implementación ofrece mejores resultados que la anterior, no es suficientemente robusta y no obtiene tiempos bajos.
+                                </p>
+
+                                <p>
+                                    En <a href="https://www.youtube.com/watch?v=iY22_ikCO6Q"><u>este enlace</u></a>  se puede ver una ejecución utilizando esta implementación.
+                                </p>
+
+                                <hr>
+
+                                <!--Entrada blog-->
+                                <div class="blog-heading">
+                                    <h2 class="section-heading text-center">Sigue Lineas - Controlador PD Mejorado</h2>
+                                    <span class="date">11 de Marzo de 2020</span>
+                                </div>
+                                <p>
+                                   Una vez que tenemos diseñado e implementado el controlador PD básico, podemos tratar de hacerlo lo más robusto posible de 
+                                   forma que permanezca sobre la línea el mayor tiempo posible.
+                                </p>
+
+                                <p>
+                                    Si tomamos como referencia para calcular el error el horizonte de la imágen, tendremos más tiempo para reaccionar y cambiar 
+                                    la rotación de forma suave, pero podemos encontrarnos con casos como el siguiente:
+                                </p>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img class="img-responsive center-block" src="assets/images/SigueLineas/img1.png" >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            En este caso nos encontramos con que la parte superior de la línea está centrada, pero la parte inferior no. Para solucionar
+                                            este problema se ha creado un segundo controlador que analiza la parte más cercana al coche y lo fuerza a centrar la parte más 
+                                            cercana. Es decir, se calcula el error en la parte superior e inferior (si se detecta) y se calculan los controladores PD para ambas zonas
+                                            y se juntan según cierto porcentaje.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>
+                                            Con esta implementación el F1 se mantiene mucho más centrado en la línea con velocidades similares a las de implementaciones anteriores y 
+                                            permite aumentar la velocidad obteniendo buenos resultados.
+                                        </p>
+                                        <p>
+                                            En <a href="https://www.youtube.com/watch?v=PfynKX2xOSI&t=10s"><u>este enlace</u></a>  se puede ver una ejecución utilizando esta implementación.
                                         </p>
                                     </div>
                                 </div>
