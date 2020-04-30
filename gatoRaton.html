@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+
+<html class="no-js"> <!--<![endif]-->
+    <head>
+
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!--font-family-->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
+
+        <!-- title of site -->
+        <title>Susana Pineda</title>
+
+        <!-- For favicon png -->
+        <link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png" />
+
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <!--flat icon css-->
+        <link rel="stylesheet" href="assets/css/flaticon.css">
+
+        <!--animate.css-->
+        <link rel="stylesheet" href="assets/css/animate.css">
+
+        <!--owl.carousel.css-->
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+        <!-- bootsnav -->
+        <link rel="stylesheet" href="assets/css/bootsnav.css">
+
+        <!--style.css-->
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!--responsive.css-->
+        <link rel="stylesheet" href="assets/css/responsive.css">
+
+        <!--style blog-->
+        <link rel="stylesheet" href="assets/css/style-blog.css">
+
+    </head>
+
+    <body>
+        <!-- top-area Start -->
+        <header class="top-area">
+            <div class="header-area">
+                <!-- Start Navigation -->
+                <nav class="navbar navbar-default bootsnav navbar-fixed dark no-background">
+
+                    <div class="container">
+
+                        <!-- Start Header Navigation -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                            <a class="navbar-brand" href="index.html"><img src="assets/images/about/logo.svg" alt="profile_image"></a>
+                        </div>
+                        <!--/.navbar-header-->
+                        <!-- End Header Navigation -->
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                                <li class=" smooth-menu active"></li>
+                                <li class=" smooth-menu"><a href="index.html#education">Formación</a></li>
+                                <li class="smooth-menu"><a href="index.html#skills">Skills</a></li>
+                                <li class="smooth-menu"><a href="index.html#portfolio">Portfolio</a></li>
+                                <li class="smooth-menu"><a href="index.html#experience">Experiencia</a></li>
+                                <li class="smooth-menu"><a href="index.html#contact">Contacto</a></li>
+                            </ul>
+                            <!--/.nav -->
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!--/.container-->
+                </nav>
+                <!--/nav-->
+                <!-- End Navigation -->
+            </div>
+            <!--/.header-area-->
+
+            <div class="clearfix"></div>
+
+        </header>
+        <!-- /.top-area-->
+        <!-- top-area End -->
+
+
+        <div id="single-blog-full-width">
+            <section class="blog-content">
+                    <div class="row">
+                        <main class="col-md-8 col-md-offset-2" style="display: block;">
+                            <article class="blog-item">
+                                <img class="img-responsive center-block" src="assets/images/GatoRaton/encabezado.png" alt="blog-featured-image">
+                                
+                                <!--Entrada blog-->
+                                <div class="blog-heading">
+                                    <h2 class="section-heading text-center">Juego del Gato y el Ratón - Primera Aproximación</h2>
+                                    <span class="date">25 de Marzo de 2020</span>
+                                </div>
+                                <p>
+                                    En este caso, se pretende implementar la lógica que permita a un dron-gato perseguir de forma automática a un segundo dron, dron-ratón.
+                                </p>
+
+                                <p>
+                                    Para esta implementación contamos con la imágen de dos cámaras situadas en la parte frontal e inferior del dron-gato. El desplazamiento 
+                                    del dron se controla mediante las variables vx, vy, vz y az, donde vx, vy y vz controlan la velocidad lineal en x, y and z y az 
+                                    representa la velocidad angular del dron. 
+                                </p>
+
+                                <p>
+                                    Al igual que con el F1 sigue líneas la primera aproximación que vamos a realizar es un controlador P para cada una de las variables 
+                                    de control (vx, vy, vz).
+                                </p>
+
+                                <p>
+                                    En este caso, para obtener la información necesaria para el controlador, primero vamos a aplicar un filtro de color para localizar el dron-ratón.
+                                </p>
+
+                                <p>
+                                    Una vez que tenemos la imagen filtrada aplicamos una serie de erosiones y dilataciones para eliminar el posible ruido presente en la imagen y 
+                                    detectamos los contornos utilizando la función de OpenCV findContours.
+                                </p>
+
+                                <p>
+                                    A partir de la detección de contornos, nos quedamos con aquel que tenga un area mayor y obtenemos su posición. Utilizando la posición del 
+                                    contorno de mayor área se calculará el error respecto al centro y se utilizará para los controladores P de las variables vx, vy y vz que 
+                                    controlan la velocidad lineal en x, y y z.
+                                </p>
+
+                                <p>
+                                    Si el dron-ratón se encuentra enfrente de nuestro dron, es decir, se ve con la cámara frontal, podremos calcular las variables vy y vz, 
+                                    pero por el momento no podremos calcular vx ya que depende de como de cerca se encuentra.
+                                </p>
+
+                                <p>
+                                    Si el dron-ratón se encuentra debajo de nuestro dron, es decir, se ve con la cámara vertical, se calcularán las variables vx y vy, 
+                                    pero por el momento no se podrá calcular vz.
+                                </p>
+
+                                <p>
+                                    Con esta implementación obtenemos resultados como los que pueden verse en el siguiente <a href="https://www.youtube.com/watch?v=deRKA741Qgk"><u>video</u></a> .
+                                </p>
+
+                                <p>
+                                    Con esta implementación tenemos dos problemas principales, no controlamos cómo de cerca nos encontramos del dron-ratón y que en caso de perder de vista al 
+                                    ratón no podemos volver a localizarlo.
+                                </p>
+
+                                <!---<div class="row">
+                                    <div class="col-md-6">
+                                        <blockquote>
+                                            <p>Duis eget ultricies lorem, et rhoncus augue. Aliquam id est sem tincidunt nisi ac, tristique enim. enim eget facilisis orcidearn malesuada.</p>
+                                            <footer>Technext</footer>
+                                        </blockquote>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="article-summary">
+                                            <p style="margin-left: 60px;">
+                                                <span>E</span>
+                                                Aliquam hendrerit a augue in suscipit. Pellen tesque id erat quis sapien dignissim sollicitu din. Nulla mattis tortor sit amet lorem dolor sollicitudin aliquam.
+                                            </p>
+
+                                            <p>
+                                                Ut cursus massa at urnaaculis estie. Sed aliquamellus vitae ultrices condimentum, leo massa mollis estiegittis miristum nulla. Mauris nunc leo, sollicitudin a ligula ut, iaculis bibendum lorem. Duis gravida suscipit purus. 
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="article-conclusion">
+                                            <strong>This is Bold Text.</strong>
+                                            In non ex at ligula fringilla lobortis. Ut et mauris auctor, aliquet nulla sed, 
+                                            <strong><em>This is Bold italic Text</em></strong> sed malesuada dolor. Integer fringilla odio a dolor aliquet, eu euismod lectus porttitor. Proin et libero nec eros eleifend commodo Phasellus sodales volutpat diam, id sagittis purus egestas dapibus. 
+                                            <a href="#"><u>This is Link Text</u></a> 
+                                            quis mi commodo blandit. Maecenas pellentesque, massa vitae faucibus consectetur, ante magna gravida magna, ut venenatis massa augue et odio.
+                                        </p>
+                                    </div>
+                                </div>-->
+
+                                <hr>
+
+                                <!--Entrada blog-->
+                                <div class="blog-heading">
+                                    <h2 class="section-heading text-center">Juego del Gato y el Ratón - Segunda Versión</h2>
+                                    <span class="date">27 de Marzo de 2020</span>
+                                </div>
+                                <p>
+                                    En la segunda aproximación se van a solucionar los dos problemas principales que se vieron en la primera implementación, control de cómo de cerca 
+                                    se encuentra uno de otro y búsqueda del dron-ratón en caso de perderlo.
+                                </p>
+
+                                <p>
+                                    Para controlar cómo de cerca se encuentra el dron-ratón se va a utilizar el área del contorno detectado. 
+                                    A partir de un área inicial se calcula la diferencia con el área actual y se utiliza para el controlador 
+                                    P de las variables vx o vz dependiendo de la cámara con la que se haya detectado el dron-ratón.
+                                </p>
+
+                                <p>
+                                    Con esta solución tenemos resultados como los del siguiente <a href="https://www.youtube.com/watch?v=bE7tJDUa7ko"><u>video</u></a>.
+                                </p>
+
+                                <p>
+                                    En caso de que el dron-gato pierda de vista al dron-ratón, o no lo encuentre desde un primer momento, se iniciará la búsqueda.
+                                </p>
+
+                                <p>
+                                    Si el dron-ratón estaba presente en el frame anterior se seguirá la dirección en la cual estaba. Por el contrario, si no estaba desde 
+                                    un primer momento o lleva sin aparecer en una de las dos cámaras varios frames el dron-gato comenzará a girar sobre si mismo y a subir 
+                                    hasta que el dron-ratón entre en su campo de visión.
+                                </p>
+
+                                <p>
+                                    Este nuevo comportamiento se puede ver en el <a href="https://www.youtube.com/watch?v=-yU7YdoOib8"><u>video del enlace</u></a>.
+                                </p>
+
+                            </article>
+                        </main>
+                </div>
+            </section>
+
+        </div> 
+        <!-- end of /#multiple-blog-page -->
+
+
+        <script type="text/javascript" src="assets/js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+        
+    </body>
+</html>
